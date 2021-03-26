@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRM_System_For_Fitness_Club"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="CRM_System_For_Fitness_Club.AuthorizationWindow"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="250" Width="400" ResizeMode="NoResize" Icon="Icons/stuff.png" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0">
+        <xctk:WatermarkTextBox x:Name="LoginTextBox" Height="35" Margin="84,44,85,0" TextWrapping="Wrap" Watermark ="Введите логин" VerticalAlignment="Top" BorderBrush="Black" FontFamily="Courier New" FontSize="16"/>
+        <xctk:WatermarkPasswordBox x:Name="PasswordTextBox" Height="35" Margin="84,98,85,0" TextWrapping="Wrap" Watermark ="Введите пароль"  VerticalAlignment="Top" BorderBrush="Black" FontFamily="Courier New" FontSize="16"/>
+        <Label x:Name="ErrorLabel" Content="Данные ввведены неправильно!" Margin="64,10,64,0" VerticalAlignment="Top" Foreground="Red" FontWeight="Bold" Visibility="Hidden" FontFamily="Colonna MT" FontSize="16"/>
+        <Button x:Name="AuthorizationBtn" Content="Войти в систему" Margin="117,148,117,0" VerticalAlignment="Top" Click="AuthorizationBtn_Click" Height="50" BorderBrush="Black" FontFamily="Courier New" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="0,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="194" FontFamily="Times New Roman" FontSize="8" TextDecorations="{x:Null}"><Run Text="ivanadmin@post.ru"/><LineBreak/><Run Text="ivanadmin"/><LineBreak/><Run Text="petrmanager@post.ru"/><LineBreak/><Run Text="permanager"/><LineBreak/><Run Text="trenerserg@post.ru"/><LineBreak/><Run Text="trenerserg"/></TextBlock>
+    </Grid>
+</Window>

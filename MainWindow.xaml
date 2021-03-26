@@ -1,0 +1,251 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRM_System_For_Fitness_Club"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="CRM_System_For_Fitness_Club.MainWindow"
+        mc:Ignorable="d"
+        Title="CRM-система для фитнес-клуба" Height="700" Width="1100" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <TabControl HorizontalAlignment="Left" Height="662" Margin="0" VerticalAlignment="Top" Width="1100" TabStripPlacement="Left">
+        <TabItem x:Name="ClientsTab" Margin="0" Height="100" Width="100">
+            <TabItem.Header>
+                <StackPanel Orientation="Vertical" Height="80" Width="80">
+                    <Image x:Name="ClientImage" Height="60" Width="60" Source="Icons/Clients.png"/>
+                    <TextBlock Text="Клиенты" Margin="0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid>
+                <DataGrid x:Name="ClientsDataGrid" AutoGenerateColumns="False" Margin="0,132,0,0" CanUserReorderColumns="False" CanUserAddRows="False" IsReadOnly="True" FontFamily="Times New Roman" FontSize="15">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Client_ID}"/>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding MiddleName}"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate}"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"/>
+                        <DataGridTextColumn Header="Оставшиеся посещения" Binding="{Binding RemainingVisits}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ClientsDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <xctk:WatermarkTextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="30" Margin="772,10,0,0" TextWrapping="Wrap" Watermark="Поиск по фамилии" VerticalAlignment="Top" Width="201" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14"/>
+                <Button x:Name="ClientSearchBtn" Content="Искать" HorizontalAlignment="Left" Margin="804,52,0,0" VerticalAlignment="Top" Width="150" Height="30" RenderTransformOrigin="0.193,0.267" Click="SearchBtn_Click" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14"/>
+                <xctk:WatermarkTextBox x:Name="ClientFirstNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="224,10,0,0" TextWrapping="Wrap" Watermark="Фамилия" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.671,0.543" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="ClientMiddleNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="224,52,0,0" TextWrapping="Wrap" Watermark="Имя" VerticalAlignment="Top" Width="200" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="ClientLastNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="224,91,0,0" TextWrapping="Wrap" Watermark="Отчество" VerticalAlignment="Top" Width="200" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <DatePicker x:Name="ClientBirthDatePicker" HorizontalAlignment="Left" Margin="112,91,0,0" VerticalAlignment="Top" Height="30" FontFamily="Times New Roman" Width="107" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Label x:Name="ClientBirthDateLabel" Content="Дата рождения:" HorizontalAlignment="Left" Margin="5,91,0,0" VerticalAlignment="Top" Height="30" FontFamily="Times New Roman" Width="107" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="ClientRegistrationBtn" Content="Зарегистрировать" HorizontalAlignment="Left" Margin="440,52,0,0" VerticalAlignment="Top" Width="150" Click="ClientRegistrationBtn_Click" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="ClientChangeInfoBtn" Content="Изменить" HorizontalAlignment="Left" Margin="440,91,0,0" VerticalAlignment="Top" Width="150" Click="ClientChangeInfoBtn_Click" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <ComboBox x:Name="MembershipIDComboBox" HorizontalAlignment="Left" Margin="558,10,0,0" VerticalAlignment="Top" Width="120" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden">
+                    <ComboBoxItem Content="10 посещений" IsSelected="True"/>
+                    <ComboBoxItem Content="15 посещений"/>
+                    <ComboBoxItem Content="20 посещений"/>
+                    <ComboBoxItem Content="25 посещений"/>
+                    <ComboBoxItem Content="30 посещений"/>
+                </ComboBox>
+                <xctk:WatermarkTextBox x:Name="ClientIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="19,52,0,0" TextWrapping="Wrap" Watermark="ID клиента" VerticalAlignment="Top" Width="200" IsReadOnly="True" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="DeleteClientBtn" Content="Удалить запись" Margin="606,91,0,0" VerticalAlignment="Top" Click="DeleteClientBtn_Click" HorizontalAlignment="Left" Width="150" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="ClientVisitBtn" Content="Имитация турникета" HorizontalAlignment="Left" Margin="804,91,0,0" VerticalAlignment="Top" Width="150" Click="ClientVisitBtn_Click" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="MemberBuyButton" Content="Покупка абонемета" HorizontalAlignment="Left" Margin="606,52,0,0" VerticalAlignment="Top" Width="150" Click="MemberBuyBtn_Click" RenderTransformOrigin="0.018,3.1" Height="30" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Label x:Name="MembershipTypeLabel" Content="Тип абонемента:" HorizontalAlignment="Left" Margin="440,10,0,0" VerticalAlignment="Top" Height="30" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:MaskedTextBox x:Name="ClientPhoneTxtBox" HorizontalAlignment="Left" Height="30" Margin="19,10,0,0" TextWrapping="Wrap" Mask="8-(000)-000-0000" VerticalAlignment="Top" Width="200" FontFamily="Times New Roman" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="ClientTabClearBtn" Content="Очистить" HorizontalAlignment="Left" Margin="683,10,0,0" VerticalAlignment="Top" Width="73" Height="30" FontFamily="Times New Roman" Click="ClientTabClearBtn_Click" BorderBrush="Black" FontSize="14" Visibility="Hidden"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="MoneyTab" Margin="0" Height="100" Width="100">
+            <TabItem.Header>
+                <StackPanel Orientation="Vertical" Height="80" Width="80">
+                    <Image x:Name="MoneyImage" Height="60" Width="60" Source="Icons/MoneyIcon.png"/>
+                    <TextBlock Text="Доходы" Margin="0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Grid.Row="1" Grid.Column="0"  Height="2" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <GridSplitter Grid.Row="3" Grid.Column="0"  Height="2" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <GridSplitter Grid.Column="1" Grid.RowSpan="5" Width="2" Background="Black"/>
+
+                <DataGrid x:Name="SalariesDataGrid" HorizontalAlignment="Left" Height="198" Margin="10,10,0,0" VerticalAlignment="Top" Width="512" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="False" FontFamily="Times New Roman" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID зарплаты" Binding="{Binding SalaryID}" Width="100"/>
+                        <DataGridTextColumn Header="ID сотрудника" Binding="{Binding EmployeeID}" Width="100"/>
+                        <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding SalaryDate}"/>
+                        <DataGridTextColumn Header="Сумма руб." Binding="{Binding SalaryAmount}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="SalaryDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <xctk:WatermarkTextBox x:Name="SalaryEmployeeIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="548,10,0,0" TextWrapping="Wrap" Watermark="ID сотрудника (двойное нажатие)" VerticalAlignment="Top" Width="222" IsReadOnly="True" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="SalaryAmountTxtBox" HorizontalAlignment="Left" Height="30" Margin="548,49,0,0" TextWrapping="Wrap" Watermark="Размер з/п" VerticalAlignment="Top" Width="93" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <Button x:Name="AddSalaryBtn" Content="Добавить" HorizontalAlignment="Left" Margin="662,49,0,0" VerticalAlignment="Top" Width="108" Click="AddSalaryBtn_Click" Height="30" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <Button x:Name="DeleteSalaryBtn" Content="Удалить" HorizontalAlignment="Left" Margin="662,139,0,0" VerticalAlignment="Top" Width="108" Click="DeleteSalaryBtn_Click" Height="30" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="SalaryIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="548,93,0,0" TextWrapping="Wrap" Watermark="ID зарплаты (двойное нажатие)" VerticalAlignment="Top" Width="222" IsReadOnly="True" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <Button x:Name="ChangeSalaryBtn" Content="Изменить" HorizontalAlignment="Left" Margin="548,139,0,0" VerticalAlignment="Top" Width="93" Click="ChangeSalaryBtn_Click" Height="30" RenderTransformOrigin="0.538,-0.067" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <DataGrid x:Name="MembershipsDataGrid" HorizontalAlignment="Left" Height="197" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="512" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="False" FontFamily="Times New Roman" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID покупки" Binding="{Binding MembershipPurchaseID}"/>
+                        <DataGridTextColumn Header="Дата покупки" Binding="{Binding PurchaseDate}"/>
+                        <DataGridTextColumn Header="Сумма руб." Binding="{Binding PurchaseAmount}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="PurchaseDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <xctk:WatermarkTextBox x:Name="PurchaseIDTxtBox" HorizontalAlignment="Left" Height="32" Margin="568,46,0,0" Grid.Row="2" TextWrapping="Wrap" Watermark="ID покупки" VerticalAlignment="Top" Width="177" IsReadOnly="True" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <Button x:Name="DeletePurchaseBtn" Content="Удалить" HorizontalAlignment="Left" Margin="568,83,0,0" Grid.Row="2" VerticalAlignment="Top" Width="177" Click="DeletePurchaseBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <DataGrid x:Name="ExpensesDataGrid" HorizontalAlignment="Left" Height="207" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="512" IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="False" FontFamily="Times New Roman" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID затраты" Binding="{Binding ExpenseID}"/>
+                        <DataGridTextColumn Header="Дата затраты" Binding="{Binding ExpenseDate}"/>
+                        <DataGridTextColumn Header="Тип затраты" Binding="{Binding ExpenseType}"/>
+                        <DataGridTextColumn Header="Стоимость руб." Binding="{Binding ExpenseCost}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ExpenseDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <xctk:WatermarkTextBox x:Name="ExpenseIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="568,10,0,0" Grid.Row="4" TextWrapping="Wrap" Watermark="ID затраты" VerticalAlignment="Top" Width="180" IsReadOnly="True" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="ExpenseCostTxtBox" HorizontalAlignment="Left" Height="29" Margin="568,54,0,0" Grid.Row="4" TextWrapping="Wrap" Watermark="Цена затраты" VerticalAlignment="Top" Width="180" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <ComboBox x:Name="ExpenseTypeComboBox" HorizontalAlignment="Left" Margin="568,97,0,0" Grid.Row="4" VerticalAlignment="Top" Width="180" Height="30" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black" Visibility="Hidden">
+                    <ComboBoxItem Content="водопровод" IsSelected="True"/>
+                    <ComboBoxItem Content="электричество"/>
+                    <ComboBoxItem Content="закупки"/>
+                    <ComboBoxItem Content="ремонт"/>
+                </ComboBox>
+                <Button x:Name="AddExpenseBtn" Content="Добавить" HorizontalAlignment="Left" Margin="539,142,0,0" Grid.Row="4" VerticalAlignment="Top" Width="102" Click="AddExpenseBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="EditExpenseBtn" Content="Изменить" HorizontalAlignment="Left" Margin="603,177,0,0" Grid.Row="4" VerticalAlignment="Top" Width="103" Click="EditExpenseBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="DeleteExpenseButton" Content="Удалить" HorizontalAlignment="Left" Margin="662,142,0,0" Grid.Row="4" VerticalAlignment="Top" Width="108" Click="DeleteExpenseButton_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Label x:Name="IncomeLabel" Content="Доход за:" Grid.Column="2" HorizontalAlignment="Left" Margin="54,182,0,0" VerticalAlignment="Top" Width="62" FontFamily="Times New Roman" FontSize="14"/>
+                <ComboBox x:Name="PeriodComboBox" SelectionChanged="PeriodComboBox_SelectionChanged" Grid.Column="2" HorizontalAlignment="Left" Margin="40,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Height="29" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black">
+                    <ComboBoxItem Content="За неделю"/>
+                    <ComboBoxItem Content="За месяц"/>
+                    <ComboBoxItem Content="За год"/>
+                    <ComboBoxItem Content="За всё время"/>
+                </ComboBox>
+                <TextBlock x:Name="IncomeTextBlock" Grid.Column="2" HorizontalAlignment="Left" Margin="40,50,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="28" Width="100" FontFamily="Times New Roman" FontSize="14"/>
+                <Button x:Name="ReportBtn" Content="Результаты в Excel" Grid.Column="2" HorizontalAlignment="Left" Margin="21,89,0,0" VerticalAlignment="Top" Width="144" Height="38" Click="ReportBtn_Click" Grid.Row="2" FontFamily="Times New Roman" FontSize="14" BorderBrush="Black"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="EmployeesTab" Margin="0" Height="100" Width="100">
+            <TabItem.Header>
+                <StackPanel Orientation="Vertical" Height="80" Width="80">
+                    <Image x:Name="EmployeeImage" Height="60" Width="60" Source="Icons/Employees.png"/>
+                    <TextBlock Text="Сотрудники" Margin="0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid>
+                <DataGrid x:Name="EmployeesDataGrid" HorizontalAlignment="Left" Height="453" Margin="10,193,0,0" VerticalAlignment="Top" Width="982"  IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="False" FontFamily="Times New Roman" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID сотрудника" Binding="{Binding EmployeeID}"/>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding EmployeeFirstName}"/>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding EmployeeMiddleName}"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding EmployeeLastName}"/>
+                        <DataGridTextColumn Header="Дата рождения" Binding="{Binding EmployeeBirthDate}"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding EmployeePhone}"/>
+                        <DataGridTextColumn Header="Почта" Binding="{Binding EmployeeEmail}"/>
+                        <DataGridTextColumn Header="Должность" Binding="{Binding Position}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="EmployeesDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <xctk:WatermarkTextBox x:Name="EmployeeIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" Watermark="ID сотрудника" VerticalAlignment="Top" Width="150" IsReadOnly="True" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="EmployeeFirstNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="10,53,0,0" TextWrapping="Wrap" Watermark="Фамилия" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="EmployeeMiddleNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="10,95,0,0" TextWrapping="Wrap" Watermark="Имя" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <DatePicker x:Name="EmployeeBirthDatePicker" HorizontalAlignment="Left" Margin="289,135,0,0" VerticalAlignment="Top" Width="108" Height="29" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden">
+                    <DatePicker.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                            <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                            <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                            <GradientStop Color="#FF718597" Offset="0.375"/>
+                            <GradientStop Color="Black" Offset="1"/>
+                        </LinearGradientBrush>
+                    </DatePicker.BorderBrush>
+                </DatePicker>
+                <xctk:WatermarkTextBox x:Name="EmployeeLastNameTxtBox" HorizontalAlignment="Left" Height="30" Margin="10,135,0,0" TextWrapping="Wrap" Watermark="Отчество" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:MaskedTextBox x:Name="EmployeePhoneTxtBox" HorizontalAlignment="Left" Height="30" Margin="181,95,0,0" TextWrapping="Wrap" Mask="8-(000)-000-0000" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <ComboBox x:Name="PositionComboBox" HorizontalAlignment="Left" Margin="181,10,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden">
+                    <ComboBoxItem Content="администратор" IsSelected="True"/>
+                    <ComboBoxItem Content="менеджер"/>
+                    <ComboBoxItem Content="тренер"/>
+                </ComboBox>
+                <xctk:WatermarkTextBox x:Name="EmployeeEmailTxtBox" HorizontalAlignment="Left" Height="30" Margin="181,53,0,0" TextWrapping="Wrap" Watermark="Почта" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="AddEmployeeBtn" Content="Добавить" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="120" Click="AddEmployeeBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="EditEmployeeBtn" Content="Изменить" HorizontalAlignment="Left" Margin="410,53,0,0" VerticalAlignment="Top" Width="120" Click="EditEmployeeBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="DeleteEmployeeBtn" Content="Удалить" HorizontalAlignment="Left" Margin="410,95,0,0" VerticalAlignment="Top" Width="120" Click="DeleteEmployeeBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Label x:Name="EmployeeBirthLabel" Content="Дата рождения:" HorizontalAlignment="Left" Margin="181,135,0,0" VerticalAlignment="Top" Height="30" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="EmployeeClearButton" Content="Очистить" HorizontalAlignment="Left" Margin="410,135,0,0" VerticalAlignment="Top" Width="120" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Click="EmployeeClearButton_Click" Visibility="Hidden"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="ScheduleTab" Margin="0" Height="100" Width="100">
+            <TabItem.Header>
+                <StackPanel Orientation="Vertical" Height="80" Width="80">
+                    <Image x:Name="CoachImage" Height="60" Width="60" Source="Icons/Schedule.png"/>
+                    <TextBlock Text="Расписание" Margin="0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid>
+                <DataGrid x:Name="CoachingDataGrid" AutoGenerateColumns="False" Height="636" Margin="10,10,353,0" VerticalAlignment="Top" IsReadOnly="True" CanUserReorderColumns="False" FontFamily="Times New Roman" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID тренировки" Width="90" Binding="{Binding CoachingID}"/>
+                        <DataGridTextColumn Header="ID тренера" Width="90" Binding="{Binding CoachID}"/>
+                        <DataGridTextColumn Header="ФИО тренер" Binding="{Binding CoachFullName}"/>
+                        <DataGridTextColumn Header="Дата тренировки" Binding="{Binding CoachingDate}"/>
+                        <DataGridTextColumn Header="Время начала" Binding="{Binding CoachingStart}"/>
+                        <DataGridTextColumn Header="Время оконачния" Binding="{Binding CoachingEnd}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="CoachingDataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <Calendar x:Name="CoachingDate" HorizontalAlignment="Left" Margin="644,10,0,0" VerticalAlignment="Top" Height="201" Width="338"/>
+                <xctk:TimePicker x:Name="CoachingEndTimePick" HorizontalAlignment="Left" Margin="805,228,0,0" VerticalAlignment="Top" Width="93" DefaultValue="03/25/2021 10:00:00" Height="27" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="AddCoachBtn" Content="Добавить" HorizontalAlignment="Left" Margin="644,268,0,0" VerticalAlignment="Top" Width="150" Click="AddCoachBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <Button x:Name="DeleteCoachBtn" Content="Удалить" HorizontalAlignment="Left" Margin="805,268,0,0" VerticalAlignment="Top" Width="151" Click="DeleteCoachBtn_Click" Height="30" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:TimePicker x:Name="CoachingStartTimePick" HorizontalAlignment="Left" Margin="703,228,0,0" VerticalAlignment="Top" Width="91" DefaultValue="03/25/2021 08:00:00" Height="27" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="SelectedCoachIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="644,188,0,0" TextWrapping="Wrap" Watermark="ID тренировки" VerticalAlignment="Top" Width="150" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+                <xctk:WatermarkTextBox x:Name="CoachIDTxtBox" HorizontalAlignment="Left" Height="30" Margin="805,188,0,0" TextWrapping="Wrap" Watermark="ID тренера" VerticalAlignment="Top" Width="151" BorderBrush="Black" FontFamily="Times New Roman" FontSize="14" Visibility="Hidden"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="Exit" Margin="0" Height="100" Width="100">
+            <TabItem.Header>
+                <StackPanel Orientation="Vertical" Height="80" Width="80">
+                    <Button x:Name="ExixButton" Height="60" Width="60" BorderBrush="White" Foreground="White" Background="White" Click="ExixButton_Click">
+                        <DockPanel>
+                            <Image Source="Icons/Exit.png"/>
+                        </DockPanel>
+                    </Button>
+                    <TextBlock Text="Выход" Margin="0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+    </TabControl>
+</Window>
